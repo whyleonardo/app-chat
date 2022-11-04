@@ -13,6 +13,7 @@ export default defineConfig({
       '@data': resolve(__dirname, 'src', 'data'),
       '@hooks': resolve(__dirname, 'src', 'hooks'),
       '@pages': resolve(__dirname, 'src', 'pages'),
+      '@services': resolve(__dirname, 'src', 'services'),
       '@theme': resolve(__dirname, 'src', 'theme'),
       '@utils': resolve(__dirname, 'src', 'utils')
       // '@[folder name]': resolve(__dirname, 'src', '[folder name]')

@@ -23,6 +23,7 @@
       "@data/*": ["src/data/*"],
       "@hooks/*": ["src/hooks/*"],
       "@pages/*": ["src/pages/*"],
+      "@services/*": ["src/services/*"],
       "@theme/*": ["src/theme/*"],
       "@utils/*": ["src/utils/*"]
       // "@[folder name]/*": ["src/[folder name]/*"]
