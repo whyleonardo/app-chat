@@ -22,6 +22,7 @@
       "@context/*": ["src/context/*"],
       "@data/*": ["src/data/*"],
       "@hooks/*": ["src/hooks/*"],
+      "@layout/*": ["src/layout/*"],
       "@pages/*": ["src/pages/*"],
       "@services/*": ["src/services/*"],
       "@theme/*": ["src/theme/*"],
