@@ -1,32 +1,4 @@
-import { useState } from 'react'
-import { supabase } from '@services/SupabaseClient'
-
-export const Login = () => {
-  console.log(supabase)
-
-  return <div>index</div>
-}
-
-// export default function Auth() {
-//   const [loading, setLoading] = useState(false)
-//   const [email, setEmail] = useState('')
-
-//   const handleLogin = async (e) => {
-//     e.preventDefault()
-
-//     try {
-//       setLoading(true)
-//       const { error } = await supabase.auth.signInWithOtp({ email })
-//       if (error) throw error
-//       alert('Check your email for the login link!')
-//     } catch (error) {
-//       alert(error.error_description || error.message)
-//     } finally {
-//       setLoading(false)
-//     }
-//   }
-
-//   return (
+/* eslint-disable @typescript-eslint/no-unused-vars */
 //     <div className="row flex-center flex">
 //       <div className="col-6 form-widget" aria-live="polite">
 //         <h1 className="header">Supabase + React</h1>
@@ -51,5 +23,26 @@ export const Login = () => {
 //         )}
 //       </div>
 //     </div>
-//   )
-// }
+
+import { useState } from 'react'
+import { loginMagicLink } from '@utils/Login/MagicLink'
+
+import { Box, useToast, Stack, Grid, Heading, Text, Input, Button } from '@chakra-ui/react'
+
+export const Login = () => {
+  // const [loading, setLoading] = useState(false)
+  // const [email, setEmail] = useState('')
+
+  // const toast = useToast()
+
+  // const handleLogin = async (e) => {
+  //   loginMagicLink()
+  // }
+
+  return (
+    <Grid h='calc(100vh - 3.5rem)' templateColumns='repeat(2, 1fr)'>
+      <Stack border='1px'></Stack>
+      <Stack border='1px' borderColor='blue' bg='whiteAlpha'></Stack>
+    </Grid>
+  )
+}

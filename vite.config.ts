@@ -12,6 +12,7 @@ export default defineConfig({
       '@context': resolve(__dirname, 'src', 'context'),
       '@data': resolve(__dirname, 'src', 'data'),
       '@hooks': resolve(__dirname, 'src', 'hooks'),
+      '@layout': resolve(__dirname, 'src', 'layout'),
       '@pages': resolve(__dirname, 'src', 'pages'),
       '@services': resolve(__dirname, 'src', 'services'),
       '@theme': resolve(__dirname, 'src', 'theme'),
