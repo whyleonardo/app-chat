@@ -58,6 +58,7 @@ export const Login = ({ session }: SessionProps) => {
       <Stack display={isMobileScreen ? 'none' : 'flex'}>
         <Box
           bgImage={
+            // eslint-disable-next-line quotes
             isDark ? "url('src/assets/images/dark.jpg')" : "url('src/assets/images/light.jpg')"
           }
           h='full'
