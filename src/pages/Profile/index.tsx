@@ -13,7 +13,7 @@ interface SessionProps {
   }
 }
 
-export const UserAccount = ({ session }: SessionProps) => {
+export const Profile = ({ session }: SessionProps) => {
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState('')
   const [website, setWebsite] = useState('')

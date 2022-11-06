@@ -3,20 +3,13 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Login } from '@pages/Login'
 import { Dashboard } from '@pages/Dashboard'
 import { Layout } from '@layout/Layout'
-import { UserAccount } from '@pages/UserAccount'
+import { Profile } from '@pages/Profile'
 
 import { supabase } from '@services/SupabaseClient'
 
-interface SessionProps {
-  user: {
-    id: string
-    email: string
-  }
-}
-
 export const App = () => {
   // @ts-ignore
-  const [session, setSession] = useState<SessionProps>(null)
+  const [session, setSession] = useState<Session>(null)
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -34,9 +27,9 @@ export const App = () => {
     <BrowserRouter>
       <Layout>
         <Routes>
-          <Route path='/' element={<Login />} />
+          <Route path='/' element={<Login session={session} />} />
           <Route path='/dashboard' element={<Dashboard />} />
-          <Route path='/profile' element={<UserAccount session={session} />} />
+          <Route path='/profile' element={<Profile session={session} />} />
         </Routes>
       </Layout>
     </BrowserRouter>

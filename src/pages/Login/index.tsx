@@ -1,48 +1,107 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-//     <div className="row flex-center flex">
-//       <div className="col-6 form-widget" aria-live="polite">
-//         <h1 className="header">Supabase + React</h1>
-//         <p className="description">Sign in via magic link with your email below</p>
-//         {loading ? (
-//           'Sending magic link...'
-//         ) : (
-//           <form onSubmit={handleLogin}>
-//             <label htmlFor="email">Email</label>
-//             <input
-//               id="email"
-//               className="inputField"
-//               type="email"
-//               placeholder="Your email"
-//               value={email}
-//               onChange={(e) => setEmail(e.target.value)}
-//             />
-//             <button className="button block" aria-live="polite">
-//               Send magic link
-//             </button>
-//           </form>
-//         )}
-//       </div>
-//     </div>
 
-import { useState } from 'react'
-import { loginMagicLink } from '@utils/Login/MagicLink'
+import { useState, useEffect } from 'react'
 
-import { Box, useToast, Stack, Grid, Heading, Text, Input, Button } from '@chakra-ui/react'
+import {
+  Box,
+  VStack,
+  Stack,
+  Grid,
+  Input,
+  useColorMode,
+  useMediaQuery,
+  useColorModeValue,
+  FormControl,
+  FormLabel,
+  Text,
+} from '@chakra-ui/react'
 
-export const Login = () => {
-  // const [loading, setLoading] = useState(false)
-  // const [email, setEmail] = useState('')
+import { LoginGoogle } from '@components/Buttons/LoginGoogle/'
+import { LoginDiscord } from '@components/Buttons/LoginDiscord/'
+import { LoginEmail } from '@components/Buttons/LoginEmail/'
+import { useNavigate } from 'react-router-dom'
+import { getProfile } from '@utils/getProfile'
 
-  // const toast = useToast()
+interface SessionProps {
+  session: {
+    user: {
+      id: string
+      email: string
+      avatar_url: string
+    }
+  }
+}
 
-  // const handleLogin = async (e) => {
-  //   loginMagicLink()
-  // }
+export const Login = ({ session }: SessionProps) => {
+  console.log(session)
+  const [loading, setLoading] = useState(false)
+  const [email, setEmail] = useState('')
+
+  const navigate = useNavigate()
+
+  const [isMobileScreen] = useMediaQuery('(max-width: 768px)')
+  const { colorMode } = useColorMode()
+  const isDark = colorMode === 'dark'
+
+  const borderAltTextColor = useColorModeValue('blackAlpha.400', 'whiteAlpha.400')
+
+  useEffect(() => {
+    setLoading(true)
+
+    if (session) {
+      getProfile({ session })
+      navigate('/dashboard')
+      setLoading(false)
+    }
+  }, [session])
 
   return (
-    <Grid h='calc(100vh - 3.5rem)' templateColumns='repeat(2, 1fr)'>
-      <Stack border='1px'></Stack>
-      <Stack border='1px' borderColor='blue' bg='whiteAlpha'></Stack>
+    <Grid h='calc(100vh - 3.5rem)' templateColumns={isMobileScreen ? 'none' : 'repeat(2, 1fr)'}>
+      <Stack display={isMobileScreen ? 'none' : 'flex'}>
+        <Box
+          bgImage={
+            isDark ? "url('src/assets/images/dark.jpg')" : "url('src/assets/images/light.jpg')"
+          }
+          h='full'
+          bgSize='cover'
+        />
+      </Stack>
+
+      <Stack alignItems='center' justifyContent='center'>
+        <VStack px='1rem'>
+          <FormControl
+            display='flex'
+            flexDirection='column'
+            minW={[null, null, '25rem']}
+            px='2rem'
+            py='4rem'
+            border='2px'
+            borderColor={borderAltTextColor}
+            rounded='1rem'
+            gap='0.5rem'
+            alignItems='center'
+          >
+            <FormLabel fontWeight='bold'>Email Address</FormLabel>
+            <Input
+              type='email'
+              variant='filled'
+              w='15rem'
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <LoginEmail email={email} />
+
+            <Text fontSize='10px' color={borderAltTextColor} textDecoration='underline'>
+              Login only with your email. Simple and Fast.
+            </Text>
+          </FormControl>
+
+          <Text color={borderAltTextColor}>or</Text>
+
+          <LoginGoogle />
+          <LoginDiscord />
+        </VStack>
+      </Stack>
     </Grid>
   )
 }
